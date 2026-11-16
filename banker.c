@@ -16,7 +16,7 @@
 #define ESTADO 3
 
 #define PEDIDO_ACEITO 0
-#define PASSA_DO_MAXIMO -1
+#define PASSOU_DO_MAXIMO -1
 #define RECURSOS_INSUFICIENTES -2
 #define ESTADO_NAO_SEGURO -3
 
@@ -365,7 +365,7 @@ bool is_safe(void){
 
 int request_resources(int customer_num, int request[]){
     if (menor_ou_igual(request, need[customer_num]) == false) {
-        return PASSA_DO_MAXIMO;
+        return PASSOU_DO_MAXIMO;
     }
 
     if (menor_ou_igual(request, available) == false) {
@@ -375,9 +375,19 @@ int request_resources(int customer_num, int request[]){
     for (int j = 0; j < number_of_resources; j++) {
         available[j] -= request[j];
         allocation[customer_num][j] += request[j];
+        need[customer_num][j] -= request[j];
     }
 
-    return PEDIDO_ACEITO;
+    if (is_safe() == true) {
+        return PEDIDO_ACEITO;
+    }
+
+    for (int j = 0; j < number_of_resources; j++) {
+        available[j] += request[j];
+        allocation[customer_num][j] -= request[j];
+        need[customer_num][j] += request[j];
+    }
+    return ESTADO_NAO_SEGURO;
 }
 
 void imprimir_vetor(FILE *saida, int vetor[]){
@@ -423,7 +433,7 @@ void executar_solicitacao(FILE *saida, int cliente, int request[]){
         imprimir_vetor(saida, request);
         fprintf(saida, " was denied because result in an unsafe state");
         break;
-    case PASSA_DO_MAXIMO:
+    case PASSOU_DO_MAXIMO:
         fprintf(saida, "The customer %d request ", cliente);
         imprimir_vetor(saida, request);
         fprintf(saida, " was denied because exceed its maximum allocation");
@@ -470,21 +480,6 @@ int executar_comandos(FILE *saida){
     return 0;
 }
 
-void mostrar_resultado(void){
-    FILE *arquivo;
-    char linha[MAXIMO_TAMANHO_LINHA];
-
-    arquivo = fopen(ARQUIVO_DO_RESULTADO, "r");
-    if (arquivo == NULL) {
-        return;
-    }
-
-    while (fgets(linha, MAXIMO_TAMANHO_LINHA, arquivo) != NULL) {
-        printf("%s", linha);
-    }
-    fclose(arquivo);
-}
-
 int main(int argc, char *argv[]){
     FILE *resultado;
     int status;
@@ -505,10 +500,6 @@ int main(int argc, char *argv[]){
     if (fclose(resultado) != 0) {
         fprintf(stderr, "Nao foi possivel gravar %s\n", ARQUIVO_DO_RESULTADO);
         status = -1;
-    }
-
-    if (status == 0) {
-        mostrar_resultado();
     }
 
     liberar_memoria();
