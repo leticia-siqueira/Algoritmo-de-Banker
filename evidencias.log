@@ -3,3 +3,45 @@ Script started on 2026-11-16 16:45:29-03:00 [TERM="xterm-256color" TTY="/dev/pts
 [?2004lexit
 
 Script done on 2026-11-16 16:45:37-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-16 19:37:32-03:00 [TERM="xterm-256color" TTY="/dev/pts/6" COLUMNS="159" LINES="19"]
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ pwd
+[?2004l/home/letciasiqueira/lmss4/Algoritmo-de-Banker
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ whoami
+[?2004lletciasiqueira
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ make clean
+[?2004lrm -f banker
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ make
+[?2004lgcc -Wall -Wextra -std=c99 -pedantic -o banker banker.c
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ make clean[4Pwhoami[3Ppwdexitcode .d Algoritmo-de-Banker[3@mkdir[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pcd[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Code .[K[2Pexit[1Ppwdwhoamimake clean[K[K./banker 10 5 7
+[?2004l[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-16 19:38:14-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-16 19:49:33-03:00 [TERM="xterm-256color" TTY="/dev/pts/6" COLUMNS="159" LINES="19"]
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ make
+[?2004lgcc -Wall -Wextra -std=c99 -pedantic -o banker banker.c
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ make clean
+[?2004lrm -f banker
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ make
+[?2004lgcc -Wall -Wextra -std=c99 -pedantic -o banker banker.c
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ make clean[Kexit./banker 10 5 7make[K./banker 10 5 7
+[?2004lAllocate to customer 0 the resources 0 2 1
+Allocate to customer 2 the resources 3 0 2
+Allocate to customer 1 the resources 2 0 0
+Allocate to customer 4 the resources 0 0 2
+Allocate to customer 3 the resources 2 1 1
+MAXIMUM   |   ALLOCATION  |   NEED
+7 5 3     |   0 2 1       |   7 5 3 
+3 2 2     |   2 0 0       |   3 2 2 
+9 0 2     |   3 0 2       |   9 0 2 
+2 2 2     |   2 1 1       |   2 2 2 
+4 3 3     |   0 0 2       |   4 3 3 
+AVAILABLE 3 2 1 
+The resources 3 2 1 are not enough to customer 4 request 4 0 0 
+The resources 3 2 1 are not enough to customer 1 request 1 0 2 
+Allocate to customer 0 the resources 0 2 0
+The resources 3 0 1 are not enough to customer 2 request 0 1 0 
+[?2004h]0;letciasiqueira@Letcia: ~/lmss4/Algoritmo-de-Banker[01;32mletciasiqueira@Letcia[00m:[01;34m~/lmss4/Algoritmo-de-Banker[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-16 19:50:34-03:00 [COMMAND_EXIT_CODE="0"]

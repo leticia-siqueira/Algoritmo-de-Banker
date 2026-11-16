@@ -324,8 +324,10 @@ int validar_os_comandos(void){
 }
 
 bool menor_ou_igual(int x[], int y[]){
-    if (x[0] > y[0]) {
-        return false;
+    for (int j = 0; j < number_of_resources; j++) {
+        if (x[j] > y[j]) {
+            return false;
+        }
     }
     return true;
 }
@@ -362,6 +364,10 @@ bool is_safe(void){
 }
 
 int request_resources(int customer_num, int request[]){
+    if (menor_ou_igual(request, need[customer_num]) == false) {
+        return PASSA_DO_MAXIMO;
+    }
+
     if (menor_ou_igual(request, available) == false) {
         return RECURSOS_INSUFICIENTES;
     }
@@ -464,6 +470,21 @@ int executar_comandos(FILE *saida){
     return 0;
 }
 
+void mostrar_resultado(void){
+    FILE *arquivo;
+    char linha[MAXIMO_TAMANHO_LINHA];
+
+    arquivo = fopen(ARQUIVO_DO_RESULTADO, "r");
+    if (arquivo == NULL) {
+        return;
+    }
+
+    while (fgets(linha, MAXIMO_TAMANHO_LINHA, arquivo) != NULL) {
+        printf("%s", linha);
+    }
+    fclose(arquivo);
+}
+
 int main(int argc, char *argv[]){
     FILE *resultado;
     int status;
@@ -484,6 +505,10 @@ int main(int argc, char *argv[]){
     if (fclose(resultado) != 0) {
         fprintf(stderr, "Nao foi possivel gravar %s\n", ARQUIVO_DO_RESULTADO);
         status = -1;
+    }
+
+    if (status == 0) {
+        mostrar_resultado();
     }
 
     liberar_memoria();
