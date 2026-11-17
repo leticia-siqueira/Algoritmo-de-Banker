@@ -16,7 +16,7 @@
 #define ESTADO 3
 
 #define PEDIDO_ACEITO 0
-#define PASSOU_DO_MAXIMO -1
+#define PASSA_DO_MAXIMO -1
 #define RECURSOS_INSUFICIENTES -2
 #define ESTADO_NAO_SEGURO -3
 
@@ -365,7 +365,7 @@ bool is_safe(void){
 
 int request_resources(int customer_num, int request[]){
     if (menor_ou_igual(request, need[customer_num]) == false) {
-        return PASSOU_DO_MAXIMO;
+        return PASSA_DO_MAXIMO;
     }
 
     if (menor_ou_igual(request, available) == false) {
@@ -388,6 +388,19 @@ int request_resources(int customer_num, int request[]){
         need[customer_num][j] += request[j];
     }
     return ESTADO_NAO_SEGURO;
+}
+
+int release_resources(int customer_num, int release[]){
+    if (menor_ou_igual(release, allocation[customer_num]) == false) {
+        return -1;
+    }
+
+    for (int j = 0; j < number_of_resources; j++) {
+        available[j] += release[j];
+        allocation[customer_num][j] -= release[j];
+        need[customer_num][j] += release[j];
+    }
+    return 0;
 }
 
 void imprimir_vetor(FILE *saida, int vetor[]){
@@ -433,11 +446,23 @@ void executar_solicitacao(FILE *saida, int cliente, int request[]){
         imprimir_vetor(saida, request);
         fprintf(saida, " was denied because result in an unsafe state");
         break;
-    case PASSOU_DO_MAXIMO:
+    case PASSA_DO_MAXIMO:
         fprintf(saida, "The customer %d request ", cliente);
         imprimir_vetor(saida, request);
         fprintf(saida, " was denied because exceed its maximum allocation");
         break;
+    }
+    fprintf(saida, "\n");
+}
+
+void fazer_liberacao(FILE *saida, int cliente, int release[]){
+    if (release_resources(cliente, release) == 0) {
+        fprintf(saida, "Release from customer %d the resources ", cliente);
+        imprimir_vetor(saida, release);
+    } else {
+        fprintf(saida, "The customer %d release ", cliente);
+        imprimir_vetor(saida, release);
+        fprintf(saida, " was denied because exceed its allocation");
     }
     fprintf(saida, "\n");
 }
@@ -470,6 +495,8 @@ int executar_comandos(FILE *saida){
         tipo = entender_comando(linha, &cliente, valores);
         if (tipo == SOLICITACAO) {
             executar_solicitacao(saida, cliente, valores);
+        } else if (tipo == LIBERACAO) {
+            fazer_liberacao(saida, cliente, valores);
         } else if (tipo == ESTADO) {
             imprimir_estado(saida);
         }
