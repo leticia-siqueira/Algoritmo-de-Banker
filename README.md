@@ -1,10 +1,8 @@
 # Implementação 5 - Algoritmo do Banqueiro
 
-Implementação em C do algoritmo do Banqueiro (Banker's Algorithm) descrito na seção 8.6.3 do livro *Operating System Concepts* (Silberschatz, Galvin e Gagne, 10ª edição), com as modificações pedidas na atividade: o número de clientes e de recursos vem da entrada, os comandos são lidos de um arquivo e a saída é gravada em `result.txt`.
-
 ## Sistema operacional
 
-Implementado e testado em **[PREENCHER: sistema operacional e versão]**, com `gcc` e `make`. O código usa apenas C padrão (C99), então compila também em outros sistemas Linux, Unix e macOS.
+Ubuntu/WSL
 
 ## Arquivos
 
@@ -58,7 +56,7 @@ Se algum argumento ou arquivo estiver errado (arquivo inexistente ou sem permiss
 
 ## Como testar
 
-1. Coloque na pasta o `customer.txt` e o `commands.txt` disponibilizados pelo professor e salve o `result.txt` dele com outro nome, por exemplo `esperado.txt`.
+1. Coloque na pasta o `customer.txt` e o `commands.txt` disponibilizados pelo professor.
 2. Compile e execute:
 
    ```
@@ -66,23 +64,3 @@ Se algum argumento ou arquivo estiver errado (arquivo inexistente ou sem permiss
    ./banker 10 5 7
    ```
 
-3. Compare a saída com a esperada:
-
-   ```
-   diff result.txt esperado.txt
-   ```
-
-   A única diferença esperada é o aviso de quebra de linha no fim do arquivo (`\ No newline at end of file`), porque o `result.txt` gerado termina com quebra de linha.
-
-Alguns casos de erro para conferir o tratamento de entradas inválidas:
-
-| Comando ou entrada | Mensagem esperada |
-| --- | --- |
-| `./banker` | `Entrada no formato errado ou sem algum argumento` |
-| `./banker 10 abc 7` | `Quantidade invalida de instancias` |
-| `./banker 10 5` (com o `customer.txt` acima) | `customer.txt: quantidade de valores diferente da quantidade de recursos` |
-| linha `XX 0 1 1 1` no `commands.txt` | `commands.txt: comando desconhecido` |
-| linha `RQ 9 0 0 0` no `commands.txt` | `commands.txt: o cliente nao existe` |
-| `customer.txt` ausente | `Nao foi possivel abrir customer.txt` |
-
-Depois de cada execução, `echo $?` mostra `0` quando deu certo e `1` quando houve erro.
